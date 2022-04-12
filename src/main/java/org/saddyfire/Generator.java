@@ -13,20 +13,28 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.fill.Property;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author SaddyFire
  * @date 2022/1/23
  * @TIME:10:51 https://baomidou.com/pages/981406/
  */
+@EnableSwagger2
+@EnableKnife4j
 public class Generator {
     public static void main(String[] args) {
         /**
          * 数据库配置(DataSourceConfig)
          */
-        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder("jdbc:mysql://localhost:3306/leadnews_user?serverTimezone=UTC",
-                "root",
-                "2323").build();
+//        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder("jdbc:mysql://localhost:3306/leadnews_user?serverTimezone=UTC",
+//                "root",
+//                "2323").build();
+
+        DataSourceConfig dataSourceConfig = new DataSourceConfig.Builder("jdbc:dm://127.0.0.1/DASTAND",
+                "DMSTAND",
+                "ccirricczw618").build();
 
         /**
          * 全局配置(GlobalConfig)
@@ -37,20 +45,20 @@ public class Generator {
                 .outputDir(System.getProperty("user.dir") + "/src/main/java")  //指定输出目录
                 .author("SaddyFire")    //设置作者名
                 .dateType(DateType.ONLY_DATE)   //时间策略
-//                .enableSwagger()    //开启swagger模式
-//                .commentDate()  //注释日期 默认值: yyyy-MM-dd
+                .enableSwagger()    //开启swagger模式
+                .commentDate("yyyy-MM-dd")  //注释日期 默认值: yyyy-MM-dd
                 .build();
 
         /**
          * 包配置(PackageConfig)
          */
         PackageConfig packageConfig = new PackageConfig.Builder()
-                .parent("com.heima.model.user") //设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径
+                .parent("cn.saddyifre") //设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径
                 .entity("pojos")    //设置实体类包名
-//                .service("serivce") //service包名
-//                .serviceImpl("impl")    //Service Impl 包名
-//                .mapper("mapper")     //Mapper 包名
-//                .controller("controller")   //Controller 包名
+                .service("serivce") //service包名
+                .serviceImpl("impl")    //Service Impl 包名
+                .mapper("mapper")     //Mapper 包名
+                .controller("controller")   //Controller 包名
 //                .other("other")     //自定义文件包名
                 .build();
 
@@ -135,7 +143,7 @@ public class Generator {
                 .enableBaseResultMap()  //启用 BaseResultMap 生成
                 .enableBaseColumnList() //启用 BaseColumnList
 //                .cache(MyMapperCache.class)     //设置缓存实现类
-                .formatMapperFileName("%sDao")  //格式化 mapper 文件名称
+                .formatMapperFileName("%sMapper")  //格式化 mapper 文件名称
 //                .formatXmlFileName("%sXml") //格式化 xml 实现类文件名称
                 .build();
 
